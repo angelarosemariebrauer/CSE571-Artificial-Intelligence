@@ -16,7 +16,7 @@ def collect_training_data(total_actions):
     num_params = 7
     #STUDENTS: network_params will be used to store your training data
     # a single sample will be comprised of: sensor_readings, action, collision
-    network_params =
+    network_params = []
 
 
     for action_i in range(total_actions):
@@ -41,12 +41,15 @@ def collect_training_data(total_actions):
                 break
 
 
-        #STUDENTS: Update network_params.
+        # Store one sample for each action.
+        network_params.append(
+            list(sensor_readings) + [action, int(collision)]
+        )
+
+    # Save rows without column titles: five sensor values, action, and collision.
+    np.savetxt("submission.csv", network_params, delimiter=",", fmt="%.6f")
 
 
-    #STUDENTS: Save .csv here. Remember rows are individual samples, the first 5
-    #columns are sensor values, the 6th is the action, and the 7th is collision.
-    #Do not title the columns. Your .csv should look like the provided sample.
 
 
 
